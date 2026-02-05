@@ -1,13 +1,13 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
   "productName": "example-tauri-astro",
-  "version": "0.1.0",
+  "version": "../package.json",
   "identifier": "com.sksizer.example-tauri-app",
   "build": {
     "beforeDevCommand": "pnpm dev",
     "devUrl": "http://localhost:1420",
     "beforeBuildCommand": "pnpm build",
-    "frontendDist": "../src-tauri/dist"
+    "frontendDist": "../src-astro/dist"
   },
   "app": {
     "withGlobalTauri": true,
