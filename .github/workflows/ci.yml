@@ -20,7 +20,7 @@ jobs:
       - run: pnpm run project:init
 
       - name: Astro check
-        run: cd src-astro && pnpm run check
+        run: pnpm run frontend:check
 
   rust:
     runs-on: ubuntu-22.04 # Use this bc of tauri project recommendations wrt to dependencies
@@ -41,10 +41,10 @@ jobs:
           workspaces: './src-tauri -> target'
 
       - name: Check formatting
-        run: cargo fmt --manifest-path src-tauri/Cargo.toml -- --check
+        run: .scripts/backend-format-check
 
       - name: Clippy lints
-        run: cargo clippy --manifest-path src-tauri/Cargo.toml -- -D warnings
+        run: .scripts/backend-lint
 
       - name: Test
-        run: cargo test --manifest-path src-tauri/Cargo.toml
+        run: .scripts/backend-test

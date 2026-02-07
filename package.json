@@ -14,11 +14,20 @@
     "clean": "pnpm run clean:frontend && pnpm run clean:backend && pnpm run clean:root",
     "install_dependencies:debian": "sudo apt install build-essential pkg-config libgtk-3-dev libglib2.0-dev libwebkit2gtk-4.1-dev libayatana-appindicator3-dev librsvg2-dev libssl-dev",
     "project:init": "pnpm install && cd src-astro && pnpm install",
-    "release": "release-it"
+    "release": "release-it",
+    "prepare": "husky",
+    "frontend:check": "cd src-astro && pnpm run check",
+    "backend:lint": ".scripts/backend-lint",
+    "backend:format:check": ".scripts/backend-format-check",
+    "frontend:lint": "cd src-astro && pnpm run lint",
+    "frontend:typecheck": "cd src-astro && pnpm run typecheck",
+    "frontend:test": "cd src-astro && pnpm run test",
+    "backend:test": ".scripts/backend-test"
   },
   "dependencies": {
     "@tauri-apps/api": "^2.10.1",
-    "@tauri-apps/plugin-opener": "^2.5.3"
+    "@tauri-apps/plugin-opener": "^2.5.3",
+    "husky": "^9.1.7"
   },
   "devDependencies": {
     "@release-it/bumper": "^7.0.5",

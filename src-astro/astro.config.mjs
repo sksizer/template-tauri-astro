@@ -2,7 +2,6 @@
 import { defineConfig } from 'astro/config';
 const host = 'localhost' //process.env.TAURI_DEV_HOST;
 // https://astro.build/config
-console.log(`ASStRO confIG ${host}`)
 export default defineConfig({
     // Vite options tailored for Tauri development and only applied in `tauri dev` or `tauri build`
     //
