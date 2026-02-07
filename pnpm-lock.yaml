@@ -17,9 +17,6 @@ importers:
       husky:
         specifier: ^9.1.7
         version: 9.1.7
-      pnpm:
-        specifier: ^10.28.2
-        version: 10.29.1
     devDependencies:
       '@release-it/bumper':
         specifier: ^7.0.5
@@ -1195,11 +1192,6 @@ packages:
 
   pkg-types@2.3.0:
     resolution: {integrity: sha512-SIqCzDRg0s9npO5XQ3tNZioRY1uK06lA41ynBC1YmFTmnY6FjUjVt6s4LoADmwoig1qqD0oK8h1p/8mlMx8Oig==}
-
-  pnpm@10.29.1:
-    resolution: {integrity: sha512-SNriM2NaZFdoowKNGVRcrMFohjnusfNzTkLW1rlxr78iqhrJr1Khc9nDogwVhXz6QA8ZmU15ovYm/Mc/zNqbvA==}
-    engines: {node: '>=18.12'}
-    hasBin: true
 
   postcss@8.5.6:
     resolution: {integrity: sha512-3Ybi1tAuwAP9s0r1UQ2J4n5Y0G05bJkpUIO0/bI9MhwmD70S5aTWbXGBwxHrelT+XM1k6dM0pk+SwNkpTRN7Pg==}
@@ -2410,8 +2402,6 @@ snapshots:
       confbox: 0.2.2
       exsolve: 1.0.8
       pathe: 2.0.3
-
-  pnpm@10.29.1: {}
 
   postcss@8.5.6:
     dependencies:
