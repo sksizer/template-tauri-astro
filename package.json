@@ -16,12 +16,11 @@
     "project:init": "pnpm install && cd src-astro && pnpm install",
     "release": "release-it",
     "prepare": "husky",
-    "frontend:check": "cd src-astro && pnpm run check",
-    "backend:lint": ".scripts/backend-lint",
-    "backend:format:check": ".scripts/backend-format-check",
     "frontend:lint": "cd src-astro && pnpm run lint",
     "frontend:typecheck": "cd src-astro && pnpm run typecheck",
     "frontend:test": "cd src-astro && pnpm run test",
+    "backend:lint": ".scripts/backend-lint",
+    "backend:format:check": ".scripts/backend-format-check",
     "backend:test": ".scripts/backend-test"
   },
   "dependencies": {
