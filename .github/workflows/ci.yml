@@ -19,8 +19,12 @@ jobs:
           version: 10.28.2
       - run: pnpm run project:init
 
-      - name: Astro check
-        run: pnpm run frontend:check
+      - name: Lint
+        run: pnpm frontend:lint
+      - name: Type check
+        run: pnpm frontend:typecheck
+      - name: Test
+        run: pnpm frontend:test
 
   rust:
     runs-on: ubuntu-22.04 # Use this bc of tauri project recommendations wrt to dependencies
