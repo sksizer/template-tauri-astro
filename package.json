@@ -4,9 +4,7 @@
   "version": "0.1.1",
   "type": "module",
   "scripts": {
-    "tauri": "tauri",
-    "dev": "cd src-astro && pnpm run dev",
-    "build": "cd src-astro && pnpm run build",
+    "tauri": "node scripts/tauri-wrapper.mjs",
     "preview": "cd src-astro && pnpm preview",
     "clean:frontend": "cd src-astro && pnpm run clean",
     "clean:backend": "rm -Rf src-tauri/target && rm src-tauri/Cargo.lock",

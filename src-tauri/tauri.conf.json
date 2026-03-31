@@ -4,9 +4,9 @@
   "version": "../package.json",
   "identifier": "com.sksizer.example-tauri-app",
   "build": {
-    "beforeDevCommand": "pnpm dev",
+    "beforeDevCommand": "cd src-astro && pnpm dev",
     "devUrl": "http://localhost:1420",
-    "beforeBuildCommand": "pnpm build",
+    "beforeBuildCommand": "cd src-astro && pnpm build",
     "frontendDist": "../src-astro/dist"
   },
   "app": {

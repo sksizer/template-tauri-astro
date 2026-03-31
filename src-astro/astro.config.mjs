@@ -1,6 +1,8 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 const host = 'localhost' //process.env.TAURI_DEV_HOST;
+/* eslint-disable-next-line no-undef */
+const port = parseInt(process.env.TAURI_DEV_PORT || '1420');
 // https://astro.build/config
 export default defineConfig({
     // Vite options tailored for Tauri development and only applied in `tauri dev` or `tauri build`
@@ -15,14 +17,14 @@ export default defineConfig({
                 ? {
                     protocol: "ws",
                     host,
-                    port: 1421,
+                    port: port + 1,
                 }
                 : undefined,
         }
     },
         // 2. tauri expects a fixed port, fail if that port is not available
         server: {
-            port: 1420,
+            port: port,
             // strictPort: true,
             host: host || false,
         }
