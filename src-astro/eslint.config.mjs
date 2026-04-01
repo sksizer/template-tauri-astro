@@ -7,6 +7,6 @@ export default [
   ...tseslint.configs.recommended,
   ...eslintPluginAstro.configs.recommended,
   {
-    ignores: ['.astro/']
-  }
+    ignores: ['.astro/'],
+  },
 ]

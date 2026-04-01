@@ -1,0 +1,23 @@
+commit-msg:
+  commands:
+    commitlint:
+      run: pnpm commitlint --edit {1}
+
+pre-commit:
+  parallel: true
+  commands:
+    eslint:
+      root: src-astro/
+      glob: '*.{js,ts,astro,mjs}'
+      run: pnpm eslint {staged_files}
+    clippy:
+      root: src-tauri/
+      glob: '*.rs'
+      run: cargo clippy -- -D warnings
+    rustfmt:
+      root: src-tauri/
+      glob: '*.rs'
+      run: cargo fmt -- --check
+    typecheck:
+      root: src-astro/
+      run: pnpm typecheck

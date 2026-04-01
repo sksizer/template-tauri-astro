@@ -21,6 +21,8 @@ jobs:
 
       - name: Lint
         run: pnpm frontend:lint
+      - name: Format check
+        run: pnpm format:check
       - name: Type check
         run: pnpm frontend:typecheck
       - name: Test
@@ -45,10 +47,10 @@ jobs:
           workspaces: './src-tauri -> target'
 
       - name: Check formatting
-        run: .scripts/backend-format-check
+        run: scripts/backend-format-check
 
       - name: Clippy lints
-        run: .scripts/backend-lint
+        run: scripts/backend-lint
 
       - name: Test
-        run: .scripts/backend-test
+        run: scripts/backend-test

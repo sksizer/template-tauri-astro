@@ -13,24 +13,31 @@
     "install_dependencies:debian": "sudo apt install build-essential pkg-config libgtk-3-dev libglib2.0-dev libwebkit2gtk-4.1-dev libayatana-appindicator3-dev librsvg2-dev libssl-dev",
     "project:init": "pnpm install && cd src-astro && pnpm install",
     "release": "release-it",
-    "prepare": "husky",
+    "prepare": "lefthook install",
     "frontend:lint": "cd src-astro && pnpm run lint",
     "frontend:typecheck": "cd src-astro && pnpm run typecheck",
     "frontend:test": "cd src-astro && pnpm run test",
-    "backend:lint": ".scripts/backend-lint",
-    "backend:format:check": ".scripts/backend-format-check",
-    "backend:test": ".scripts/backend-test"
+    "backend:lint": "scripts/backend-lint",
+    "backend:format:check": "scripts/backend-format-check",
+    "backend:test": "scripts/backend-test",
+    "format": "cd src-astro && pnpm run format",
+    "format:check": "cd src-astro && pnpm run format:check"
   },
-  "dependencies": {
-    "@tauri-apps/api": "^2.10.1",
-    "@tauri-apps/plugin-opener": "^2.5.3",
-    "husky": "^9.1.7"
-  },
+  "dependencies": {},
   "devDependencies": {
+    "@commitlint/cli": "^20.5.0",
+    "@commitlint/config-conventional": "^20.5.0",
+    "@commitlint/types": "^20.5.0",
     "@release-it/bumper": "^7.0.5",
     "@tauri-apps/cli": "^2.10.0",
+    "lefthook": "^1.11.13",
     "release-it": "^19.2.4",
     "typescript": "~5.6.2",
     "vite": "^6.0.3"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "lefthook"
+    ]
   }
 }
