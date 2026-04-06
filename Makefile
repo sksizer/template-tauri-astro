@@ -2,15 +2,16 @@
 
 .PHONY: help initialize rename \
         dev build build-debug storybook ports \
-        lint lint-fix format format-check typecheck \
+        lint lint-fix format format-check typecheck full-check full-write \
         frontend-dev frontend-build frontend-preview \
         frontend-lint frontend-test frontend-typecheck \
         frontend-format frontend-format-check \
         test test-unit \
         rust-lint rust-format rust-test \
         backend-lint backend-format-check backend-test \
-        ci setup clean storybook-build \
-        install-deps-debian release template-check
+        ci setup clean storybook-build changelog \
+        install-deps-debian release \
+        template-check bring-up-to-date bring-up-to-date-all sync-cousins
 
 ## Development ---------------------------------------------------------------
 
@@ -45,6 +46,8 @@ help: ## Show this help message
 	@echo "  format         Format all code"
 	@echo "  format-check   Check formatting without changes"
 	@echo "  typecheck      Run frontend type checking"
+	@echo "  full-check     Run all code checks (lint + format-check + typecheck)"
+	@echo "  full-write     Auto-fix all formatting (frontend + Rust)"
 	@echo ""
 	@echo "Testing:"
 	@echo "  test           Run all tests (frontend + Rust)"
@@ -64,7 +67,13 @@ help: ## Show this help message
 	@echo "  clean          Remove build artifacts"
 	@echo "  install-deps-debian  Install system dependencies (Debian/Ubuntu)"
 	@echo "  release        Create a new release"
-	@echo "  template-check Check template sync status"
+	@echo "  changelog      Generate changelog from conventional commits"
+	@echo ""
+	@echo "Template:"
+	@echo "  template-check       Check template drift against upstream"
+	@echo "  bring-up-to-date     Sync with upstream template (dry-run default)"
+	@echo "  bring-up-to-date-all Sync all downstream projects (dry-run default)"
+	@echo "  sync-cousins         Sync shared layer to cousin templates (dry-run default)"
 	@echo ""
 
 ## Initialization ------------------------------------------------------------
@@ -139,6 +148,12 @@ format-check: ## Check formatting without changes
 typecheck: ## Run frontend type checking
 	pnpm run frontend:typecheck
 
+full-check: lint format-check typecheck ## Run all code checks
+
+full-write: ## Auto-fix all formatting (frontend + Rust)
+	cd src-astro && pnpm run format
+	cd src-tauri && cargo fmt --all
+
 ## Testing -------------------------------------------------------------------
 
 test: ## Run all tests (frontend + Rust)
@@ -186,5 +201,17 @@ install-deps-debian: ## Install system dependencies (Debian/Ubuntu)
 release: ## Create a new release
 	pnpm run release
 
-template-check: ## Check template sync status
+changelog: ## Generate changelog from conventional commits
+	git-cliff --output CHANGELOG.md
+
+template-check: ## Check template drift against upstream
 	scripts/sync-template-check
+
+bring-up-to-date: ## Sync with upstream template (dry-run default; pass ARGS="--execute" to run)
+	bash scripts/bring_up_to_date.sh $(ARGS)
+
+bring-up-to-date-all: ## Sync all downstream projects (dry-run default; pass ARGS="--execute" to run)
+	bash scripts/bring_up_to_date_all.sh $(ARGS)
+
+sync-cousins: ## Sync shared layer to cousin templates (dry-run default; pass ARGS="--execute" to run)
+	bash scripts/sync_cousins.sh $(ARGS)
