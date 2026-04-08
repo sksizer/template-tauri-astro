@@ -30,7 +30,7 @@
     "@commitlint/types": "^20.5.0",
     "@release-it/bumper": "^7.0.5",
     "@tauri-apps/cli": "^2.10.0",
-    "lefthook": "^1.11.13",
+    "lefthook": "^2.1.5",
     "release-it": "^19.2.4",
     "typescript": "~5.6.2",
     "vite": "^6.0.3"
