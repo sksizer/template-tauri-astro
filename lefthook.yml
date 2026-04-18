@@ -18,6 +18,14 @@ pre-commit:
       root: src-tauri/
       glob: '*.rs'
       run: cargo fmt -- --check
+    oxlint:
+      root: src-astro/
+      glob: '*.{js,ts,astro,mjs}'
+      run: pnpm oxlint {staged_files}
+    prettier:
+      root: src-astro/
+      glob: '*.{js,ts,astro,css,json,md,yml,yaml,mjs}'
+      run: pnpm prettier --check {staged_files}
     typecheck:
       root: src-astro/
       run: pnpm typecheck

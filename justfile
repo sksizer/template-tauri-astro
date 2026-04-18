@@ -83,11 +83,11 @@ lint-fix:
 
 # Format all code
 format:
-    cd src-astro && pnpm run format
+    pnpm run format
 
 # Check formatting without changes
 format-check:
-    cd src-astro && pnpm run format:check
+    pnpm run format:check
     cd src-tauri && cargo fmt -- --check
 
 # Run frontend type checking
@@ -100,7 +100,7 @@ alias fc := full-check
 
 # Auto-fix all formatting (frontend + Rust)
 full-write:
-    cd src-astro && pnpm run format
+    pnpm run format
     cd src-tauri && cargo fmt --all
 alias fw := full-write
 
@@ -153,25 +153,13 @@ setup:
     pnpm run project:init
     pnpm lefthook install
 
-# Remove build artifacts
-clean:
-    pnpm run clean
-
-# Install system dependencies (Debian/Ubuntu)
-install-deps-debian:
-    sudo apt install build-essential pkg-config libgtk-3-dev libglib2.0-dev libwebkit2gtk-4.1-dev libayatana-appindicator3-dev librsvg2-dev libssl-dev
-
-# Create a new release
-release:
-    pnpm run release
-
 # Generate changelog from conventional commits
 changelog:
     git-cliff --output CHANGELOG.md
 
 # Check template drift against upstream
 template-check:
-    scripts/sync-template-check
+    pnpm run template:check
 
 # Bring repo up to date with upstream template (dry-run by default; --execute to run)
 bring-up-to-date *args:
@@ -183,6 +171,34 @@ bring-up-to-date-all *args:
     bash scripts/bring_up_to_date_all.sh {{args}}
 alias butda := bring-up-to-date-all
 
+# Update deps within semver ranges (dry-run by default; --execute to run)
+deps-update *args:
+    bash scripts/deps_update.sh {{args}}
+
+# Update deps within semver ranges across all downstream projects
+deps-update-all *args:
+    bash scripts/deps_update_all.sh {{args}}
+
+# Upgrade deps to latest (cross-major; dry-run by default; --execute to run)
+deps-upgrade *args:
+    bash scripts/deps_upgrade.sh {{args}}
+
+# Upgrade deps to latest across all downstream projects
+deps-upgrade-all *args:
+    bash scripts/deps_upgrade_all.sh {{args}}
+
 # Sync shared layer to cousin template repos (dry-run by default; --execute to run)
 sync-cousins *args:
     bash scripts/sync_cousins.sh {{args}}
+
+# Remove build artifacts
+clean:
+    pnpm run clean
+
+# Install system dependencies (Debian/Ubuntu)
+install-deps-debian:
+    sudo apt install build-essential pkg-config libgtk-3-dev libglib2.0-dev libwebkit2gtk-4.1-dev libayatana-appindicator3-dev librsvg2-dev libssl-dev
+
+# Create a new release
+release:
+    pnpm run release
