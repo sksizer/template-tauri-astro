@@ -4,15 +4,6 @@ fn echo(message: &str) -> String {
     format!("Echo from Rust: {}", message)
 }
 
-#[cfg_attr(mobile, tauri::mobile_entry_point)]
-pub fn run() {
-    tauri::Builder::default()
-        .plugin(tauri_plugin_opener::init())
-        .invoke_handler(tauri::generate_handler![echo])
-        .run(tauri::generate_context!())
-        .expect("error while running tauri application");
-}
-
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -22,4 +13,13 @@ mod tests {
         let result = echo("Hello World");
         assert_eq!(result, "Echo from Rust: Hello World");
     }
+}
+
+#[cfg_attr(mobile, tauri::mobile_entry_point)]
+pub fn run() {
+    tauri::Builder::default()
+        .plugin(tauri_plugin_opener::init())
+        .invoke_handler(tauri::generate_handler![echo])
+        .run(tauri::generate_context!())
+        .expect("error while running tauri application");
 }

@@ -8,7 +8,7 @@ Pay special attention to:
 - Tooling config: justfile, Makefile, lefthook.yml, mise.toml, .editorconfig, .prettierrc.yml
 - CI workflows: .github/workflows/
 - Rust config: src-tauri/rustfmt.toml, src-tauri/Cargo.toml (dependency versions only, not package name/version)
-- Scripts: scripts/
+- Scripts: scripts/, .scripts/
 - Release config: .release-it.json, cliff.toml, commitlint.config.ts
 
 Do NOT overwrite:

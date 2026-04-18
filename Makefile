@@ -9,8 +9,8 @@
         test test-unit \
         rust-lint rust-format rust-test \
         backend-lint backend-format-check backend-test \
-        ci setup clean storybook-build changelog \
-        install-deps-debian release \
+        ci setup clean storybook-build \
+        install-deps-debian release changelog \
         template-check bring-up-to-date bring-up-to-date-all sync-cousins
 
 ## Development ---------------------------------------------------------------
@@ -63,6 +63,7 @@ help: ## Show this help message
 	@echo ""
 	@echo "CI & Setup:"
 	@echo "  ci             Run full CI pipeline (lint, format-check, typecheck, test, build)"
+	@echo "  storybook-build Build Storybook static site (placeholder)"
 	@echo "  setup          Install dependencies and git hooks"
 	@echo "  clean          Remove build artifacts"
 	@echo "  install-deps-debian  Install system dependencies (Debian/Ubuntu)"
@@ -139,10 +140,10 @@ lint-fix: ## Auto-fix lint issues
 	cd src-tauri && cargo clippy --fix --allow-dirty
 
 format: ## Format all code
-	cd src-astro && pnpm run format
+	pnpm run format
 
 format-check: ## Check formatting without changes
-	cd src-astro && pnpm run format:check
+	pnpm run format:check
 	cd src-tauri && cargo fmt -- --check
 
 typecheck: ## Run frontend type checking
@@ -151,7 +152,7 @@ typecheck: ## Run frontend type checking
 full-check: lint format-check typecheck ## Run all code checks
 
 full-write: ## Auto-fix all formatting (frontend + Rust)
-	cd src-astro && pnpm run format
+	pnpm run format
 	cd src-tauri && cargo fmt --all
 
 ## Testing -------------------------------------------------------------------
@@ -192,20 +193,13 @@ setup: ## Install dependencies and git hooks
 	pnpm run project:init
 	pnpm lefthook install
 
-clean: ## Remove build artifacts
-	pnpm run clean
-
-install-deps-debian: ## Install system dependencies (Debian/Ubuntu)
-	sudo apt install build-essential pkg-config libgtk-3-dev libglib2.0-dev libwebkit2gtk-4.1-dev libayatana-appindicator3-dev librsvg2-dev libssl-dev
-
-release: ## Create a new release
-	pnpm run release
-
 changelog: ## Generate changelog from conventional commits
 	git-cliff --output CHANGELOG.md
 
+## Template ------------------------------------------------------------------
+
 template-check: ## Check template drift against upstream
-	scripts/sync-template-check
+	pnpm run template:check
 
 bring-up-to-date: ## Sync with upstream template (dry-run default; pass ARGS="--execute" to run)
 	bash scripts/bring_up_to_date.sh $(ARGS)
@@ -215,3 +209,12 @@ bring-up-to-date-all: ## Sync all downstream projects (dry-run default; pass ARG
 
 sync-cousins: ## Sync shared layer to cousin templates (dry-run default; pass ARGS="--execute" to run)
 	bash scripts/sync_cousins.sh $(ARGS)
+
+clean: ## Remove build artifacts
+	pnpm run clean
+
+install-deps-debian: ## Install system dependencies (Debian/Ubuntu)
+	sudo apt install build-essential pkg-config libgtk-3-dev libglib2.0-dev libwebkit2gtk-4.1-dev libayatana-appindicator3-dev librsvg2-dev libssl-dev
+
+release: ## Create a new release
+	pnpm run release

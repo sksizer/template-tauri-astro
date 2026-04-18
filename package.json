@@ -5,7 +5,6 @@
   "type": "module",
   "scripts": {
     "tauri": "node scripts/tauri-wrapper.mjs",
-    "preview": "cd src-astro && pnpm preview",
     "clean:frontend": "cd src-astro && pnpm run clean",
     "clean:backend": "rm -Rf src-tauri/target && rm src-tauri/Cargo.lock",
     "clean:root": "rm -Rf node_modules",
@@ -20,24 +19,27 @@
     "backend:lint": "scripts/backend-lint",
     "backend:format:check": "scripts/backend-format-check",
     "backend:test": "scripts/backend-test",
+    "template:check": "scripts/sync-template-check",
     "format": "cd src-astro && pnpm run format",
     "format:check": "cd src-astro && pnpm run format:check"
   },
-  "dependencies": {},
-  "devDependencies": {
-    "@commitlint/cli": "^20.5.0",
-    "@commitlint/config-conventional": "^20.5.0",
-    "@commitlint/types": "^20.5.0",
-    "@release-it/bumper": "^7.0.5",
-    "@tauri-apps/cli": "^2.10.0",
-    "lefthook": "^1.11.13",
-    "release-it": "^19.2.4",
-    "typescript": "~5.6.2",
-    "vite": "^6.0.3"
+  "dependencies": {
+    "pnpm": "^10.33.0"
   },
   "pnpm": {
     "onlyBuiltDependencies": [
       "lefthook"
     ]
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^20.5.0",
+    "@commitlint/config-conventional": "^20.5.0",
+    "@commitlint/types": "^20.5.0",
+    "@release-it/bumper": "^7.0.5",
+    "@tauri-apps/cli": "^2.10.1",
+    "lefthook": "^2.1.6",
+    "release-it": "^19.2.4",
+    "typescript": "~5.6.2",
+    "vite": "^6.0.3"
   }
 }
